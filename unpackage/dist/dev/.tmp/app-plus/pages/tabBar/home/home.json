@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "首页",
+  "titleNView": false,
+  "bounce": "none",
+  "usingComponents": {
+    "page-header": "/pages/tabBar/home/pageHeader"
+  }
+}
