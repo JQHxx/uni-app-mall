@@ -120,4 +120,8 @@
               align-items: center;
       font-size: 42rpx;
 }
+.place {
+  height: 100rpx;
+  background-color: #FFFFFF;
+}
 

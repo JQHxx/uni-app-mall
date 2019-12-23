@@ -734,7 +734,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -7009,7 +7009,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -7030,14 +7030,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -7113,7 +7113,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8557,6 +8557,99 @@ function normalizeComponent (
   }
 }
 
+
+/***/ }),
+/* 15 */
+/*!*************************************************************!*\
+  !*** D:/Work/File/code/uni-app/uni-app-mall/utils/https.js ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {module.exports = function (params) {
+  var url = params.url;
+  var method = params.method;
+  var header = params.header || {};
+  var data = params.data || {};
+
+  // 请求方式 GET POST
+  if (method) {
+    method = method.toUpperCase();
+    if (method == "POST") {
+      header = {
+        "content-type": "application/x-www-form-urlencoded" };
+
+    }
+  }
+
+  // 网络请求动画
+  if (!params.hideLoading) {
+    uni.showLoading({
+      title: "加载中" });
+
+  }
+
+  // 发起请求
+  uni.request({
+    url: url,
+    method: method || "GET",
+    header: header,
+    data: data,
+    success: function success(res) {
+      if (res.statusCode && res.statusCode != 200) {
+        //api错误
+        uni.showModal({
+          content: res.msg });
+
+        return;
+      }
+      typeof params.success == "function" && params.success(res.data);
+    },
+    fail: function fail(e) {
+      uni.showModal({
+        content: e.msg });
+
+      typeof params.fail == 'function' && params.fail(e.data);
+      return;
+    },
+    complete: function complete(res) {
+      uni.hideLoading();
+      typeof params.complete == "function" && params.complete(res.data);
+      return;
+    } });
+
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 16 */,
+/* 17 */,
+/* 18 */,
+/* 19 */,
+/* 20 */,
+/* 21 */,
+/* 22 */
+/*!******************************************************************!*\
+  !*** D:/Work/File/code/uni-app/uni-app-mall/utils/interfaces.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+var domain = "https://uniapp-interface.herokuapp.com/";
+
+var interfaces = {
+  // 获取首页数据
+  getMallData: domain + "api/profiles/mall_list",
+  // 获取分类数据
+  getCategory: domain + "api/profiles/category",
+  // 获取商品列表数据
+  getGoodsList: domain + "api/profiles/goodslist",
+  // 商品详细信息
+  getGoods: domain + "api/profiles/goods" };
+
+module.exports = interfaces;
 
 /***/ })
 ]]);

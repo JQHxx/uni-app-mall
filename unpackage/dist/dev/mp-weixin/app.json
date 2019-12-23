@@ -44,5 +44,9 @@
       }
     ]
   },
-  "usingComponents": {}
+  "usingComponents": {
+    "page-status": "/components/status",
+    "page-header": "/pages/tabBar/home/pageHeader"
+  },
+  "sitemapLocation": "sitemap14.json"
 }

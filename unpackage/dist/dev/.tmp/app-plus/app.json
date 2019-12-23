@@ -3,7 +3,8 @@
     "pages/tabBar/home/home",
     "pages/tabBar/category/category",
     "pages/tabBar/cart/cart",
-    "pages/tabBar/user/user"
+    "pages/tabBar/user/user",
+    "pages/goods/goodsList"
   ],
   "window": {
     "navigationBarTextStyle": "black",
@@ -51,5 +52,8 @@
   },
   "appname": "uni-app-mall",
   "compilerVersion": "2.4.6",
-  "usingComponents": {}
+  "usingComponents": {
+    "page-status": "/components/status",
+    "page-header": "/pages/tabBar/home/pageHeader"
+  }
 }
