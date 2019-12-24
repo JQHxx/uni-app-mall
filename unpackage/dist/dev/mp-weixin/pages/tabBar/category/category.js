@@ -122,7 +122,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -199,7 +199,8 @@ var _interfaces = _interopRequireDefault(__webpack_require__(/*! ../../../utils/
 //
 //
 //
-var _default = { data: function data() {return { categoryList: [], currentNavigation: 0 };}, onLoad: function onLoad() {this.initData();}, methods: { handleCategory: function handleCategory(index) {this.currentNavigation = index;}, initData: function initData() {var _this = this;this.request({ url: _interfaces.default.getCategory, success: function success(res) {_this.categoryList = res.data;} });} } };exports.default = _default;
+var _default = { data: function data() {return { categoryList: [], currentNavigation: 0 };}, onLoad: function onLoad() {this.initData();}, methods: { handleCategory: function handleCategory(index) {this.currentNavigation = index;}, handleCategoryList: function handleCategoryList(item) {uni.navigateTo({ url: '../../goods/goodsList?name=' + item.name });}, initData: function initData() {var _this = this;this.request({ url: _interfaces.default.getCategory, success: function success(res) {_this.categoryList = res.data;} });} } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

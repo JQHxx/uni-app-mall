@@ -3,7 +3,9 @@
     "pages/tabBar/home/home",
     "pages/tabBar/category/category",
     "pages/tabBar/cart/cart",
-    "pages/tabBar/user/user"
+    "pages/tabBar/user/user",
+    "pages/goods/goodsList",
+    "pages/goods/goods"
   ],
   "subPackages": [],
   "window": {
@@ -47,6 +49,5 @@
   "usingComponents": {
     "page-status": "/components/status",
     "page-header": "/pages/tabBar/home/pageHeader"
-  },
-  "sitemapLocation": "sitemap14.json"
+  }
 }

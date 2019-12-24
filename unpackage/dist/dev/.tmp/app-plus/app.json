@@ -4,7 +4,8 @@
     "pages/tabBar/category/category",
     "pages/tabBar/cart/cart",
     "pages/tabBar/user/user",
-    "pages/goods/goodsList"
+    "pages/goods/goodsList",
+    "pages/goods/goods"
   ],
   "window": {
     "navigationBarTextStyle": "black",

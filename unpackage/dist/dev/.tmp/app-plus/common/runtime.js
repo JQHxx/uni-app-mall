@@ -102,11 +102,11 @@
 /******/
 /******/
 /******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"components/status":1,"pages/tabBar/home/pageHeader":1};
+/******/ 		var cssChunks = {"components/status":1,"pages/tabBar/home/pageHeader":1,"pages/goods/goodHeader":1};
 /******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
 /******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
 /******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({"components/status":"components/status","pages/tabBar/home/pageHeader":"pages/tabBar/home/pageHeader"}[chunkId]||chunkId) + ".wxss";
+/******/ 				var href = "" + ({"components/status":"components/status","pages/tabBar/home/pageHeader":"pages/tabBar/home/pageHeader","pages/goods/goodHeader":"pages/goods/goodHeader"}[chunkId]||chunkId) + ".wxss";
 /******/ 				var fullhref = __webpack_require__.p + href;
 /******/ 				var existingLinkTags = document.getElementsByTagName("link");
 /******/ 				for(var i = 0; i < existingLinkTags.length; i++) {

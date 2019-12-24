@@ -132,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -201,7 +201,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _interfaces = _interopRequireDefault(__webpack_require__(/*! ../../../utils/interfaces.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var pageHeader = function pageHeader() {return __webpack_require__.e(/*! import() | pages/tabBar/home/pageHeader */ "pages/tabBar/home/pageHeader").then(__webpack_require__.bind(null, /*! ./pageHeader.vue */ 52));};var _default =
+var _interfaces = _interopRequireDefault(__webpack_require__(/*! ../../../utils/interfaces.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var pageHeader = function pageHeader() {return __webpack_require__.e(/*! import() | pages/tabBar/home/pageHeader */ "pages/tabBar/home/pageHeader").then(__webpack_require__.bind(null, /*! ./pageHeader.vue */ 66));};var _default =
 {
   components: {
     pageHeader: pageHeader },
@@ -228,12 +228,21 @@ var _interfaces = _interopRequireDefault(__webpack_require__(/*! ../../../utils/
         } });
 
     },
-    dotWidth: function dotWidth(len, index) {
-      console.log(len, index);
-    },
     chageSwiper: function chageSwiper(event) {
       this.currentSwiper = event.detail.current;
+    },
+    handleSelect: function handleSelect(item) {
+      uni.navigateTo({
+        url: '../../goods/goodsList?name=' + item.name });
+
+    },
+    handleSelectPromotion: function handleSelectPromotion(item) {
+      uni.showToast({
+        title: item.title,
+        icon: 'none' });
+
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 22 */,

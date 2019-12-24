@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "商品",
+  "titleNView": false,
+  "bounce": "none",
+  "usingComponents": {
+    "page-status": "/components/status",
+    "goods-header": "/pages/goods/goodHeader"
+  }
+}

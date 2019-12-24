@@ -1,0 +1,1 @@
+<view><page-status vue-id="1" bind:__l="__l"></page-status><goods-header vue-id="2" bind:__l="__l"></goods-header></view>

@@ -20,7 +20,7 @@
 		<!-- 分类 -->
 		<view class="category">
 			<view class="category-box">
-				<view class="category-item" v-for="(item, index) in categoryList" :key="index">
+				<view @tap="handleSelect(item)" class="category-item" v-for="(item, index) in categoryList" :key="index">
 					<view class="category__img">
 						<image :src="item.img"></image>
 					</view>
@@ -41,7 +41,7 @@
 					优惠活动
 				</view>
 				<view class="promotion__content">
-					<view class="promotion__item" v-for="(item, index) in promotion" :key="index">
+					<view @tap="handleSelectPromotion(item)" class="promotion__item" v-for="(item, index) in promotion" :key="index">
 						<view class="promotion__title">
 							{{item.title}}
 						</view>
@@ -94,11 +94,19 @@
 					}
 				})
 			},
-			dotWidth(len, index) {
-				console.log(len, index);
-			},
 			chageSwiper(event) {
 				this.currentSwiper = event.detail.current
+			},
+			handleSelect(item) {
+				uni.navigateTo({
+					url: '../../goods/goodsList?name=' + item.name
+				})
+			},
+			handleSelectPromotion(item) {
+				uni.showToast({
+					title: item.title,
+					icon: 'none'
+				})
 			}
 		}
 	}
