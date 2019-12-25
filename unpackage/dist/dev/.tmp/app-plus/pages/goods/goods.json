@@ -4,6 +4,7 @@
   "bounce": "none",
   "usingComponents": {
     "page-status": "/components/status",
-    "goods-header": "/pages/goods/goodHeader"
+    "goods-header": "/pages/goods/goodHeader",
+    "pop-spec": "/components/popSpec"
   }
 }

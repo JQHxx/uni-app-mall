@@ -77,7 +77,6 @@
 		},
 		onReachBottom() {
 			if (this.hasMore) {
-				console.log(1);
 				this.page++;
 				this.initData();
 			}

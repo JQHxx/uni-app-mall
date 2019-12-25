@@ -201,7 +201,6 @@ var _default = { data: function data() {return { goodsList: [], page: 1, size: 6
   },
   onReachBottom: function onReachBottom() {
     if (this.hasMore) {
-      console.log(1);
       this.page++;
       this.initData();
     }
