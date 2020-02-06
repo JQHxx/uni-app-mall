@@ -5,13 +5,16 @@
     "pages/tabBar/cart/cart",
     "pages/tabBar/user/user",
     "pages/goods/goodsList",
-    "pages/goods/goods"
+    "pages/goods/goods",
+    "pages/goods/ratings",
+    "pages/orders/order",
+    "pages/tabBar/user/qrCode"
   ],
   "window": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
-    "backgroundColor": "#F8F8F8"
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#ffffff"
   },
   "tabBar": {
     "color": "#333333",
@@ -52,7 +55,7 @@
     "autoclose": false
   },
   "appname": "uni-app-mall",
-  "compilerVersion": "2.4.6",
+  "compilerVersion": "2.5.1",
   "usingComponents": {
     "page-status": "/components/status",
     "page-header": "/pages/tabBar/home/pageHeader"

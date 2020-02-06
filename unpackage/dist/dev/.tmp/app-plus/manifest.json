@@ -42,7 +42,7 @@
     "statusbar": {
       "immersed": "supportedDevice",
       "style": "dark",
-      "background": "#F8F8F8"
+      "background": "#FFFFFF"
     },
     "usingComponents": true,
     "nvueCompiler": "uni-app",
@@ -90,7 +90,7 @@
       }
     },
     "uni-app": {
-      "compilerVersion": "2.4.6",
+      "compilerVersion": "2.5.1",
       "control": "v8",
       "nvueCompiler": "uni-app",
       "renderer": "auto",

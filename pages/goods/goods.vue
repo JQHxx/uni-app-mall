@@ -43,7 +43,8 @@
 			</view>
 		</view>
 		<!-- 模态框 -->
-		<popSpec @select-spec="handleSelectSpec" @sub="sub" @add="add" @hide-pop="hidePopSpec" :goodsData="goodsData" :goodsInfo="goodsInfo" :spaceInfo="spaceInfo"></popSpec>
+		<popSpec @select-spec="handleSelectSpec" @sub="sub" @add="add" @hide-pop="hidePopSpec" :goodsData="goodsData"
+		 :goodsInfo="goodsInfo" :spaceInfo="spaceInfo"></popSpec>
 		<!-- 评价 -->
 		<view class="comment">
 			<view class="row">
@@ -76,6 +77,29 @@
 				<rich-text :nodes="goodsData.descriptionStr"></rich-text>
 			</view>
 		</view>
+
+		<!-- 底部菜单 -->
+		<view class="footer">
+			<view class="icons">
+				<view class="box">
+					<view class="icon iconfont">&#xe7e0;</view>
+					<view class="text">分享</view>
+				</view>
+				<view class="box" @tap="keep">
+					<view class="icon iconfont" v-if="isKeep">&#xe64b;</view>
+					<view class="icon iconfont" v-else>&#xe64c;</view>
+					<view class="text">{{isKeep?"已":''}}收藏</view>
+				</view>
+			</view>
+			<view class="btns">
+				<view class="joinCart" @tap="joinCart">
+					加入购物车
+				</view>
+				<view class="buy" @tap="handleCheck">
+					立即购买
+				</view>
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -90,6 +114,7 @@
 		},
 		data() {
 			return {
+				isKeep: false,
 				swiperIndex: 0,
 				goodsData: {
 					swiperList: [],
@@ -138,25 +163,84 @@
 			handleSelectSpec(spec) {
 				this.goodsInfo.spec = spec
 			},
+			handleCheck() {
+				let tempList = [];
+				tempList.push(this.goodsInfo);
+				uni.setStorage({
+					key: "checkList",
+					data: tempList,
+					success: () => {
+						uni.navigateTo({
+							url: "../orders/order"
+						})
+					}
+				})
+			},
 			sub() {
-				if(this.goodsInfo.number <= 1) {
+				if (this.goodsInfo.number <= 1) {
 					return
 				}
 				this.goodsInfo.number--
 			},
 			add() {
-				this.goodsInfo.number ++;
+				this.goodsInfo.number++;
+				console.log(typeof(this.goodsInfo.number));
 			},
 			showAllComment() {
-				try{
+				try {
 					uni.setStorageSync('comments', this.goodsData.comment)
 					uni.navigateTo({
-						url:'./ratings'
+						url: './ratings'
 					})
-				}catch(e){
+				} catch (e) {
 					//TODO handle the exception
 					console.log(e);
 				}
+			},
+			keep() {
+				this.isKeep = !this.isKeep;
+			},
+			joinCart() {
+				// console.log(this.goodsInfo);
+
+				uni.getStorage({
+					key: "goodsList",
+					success: res => {
+						let goodsList = res.data;
+						console.log(goodsList);
+						let isExist = false;
+
+						goodsList.forEach(goods => {
+							if (goods.goods_id == this.goodsInfo.goods_id && goods.spec == this.goodsInfo.spec) {
+								goods.number = parseInt(goods.number) + parseInt(this.goodsInfo.number);
+								isExist = true
+							}
+						})
+						
+						if(!isExist) {
+							goodsList.push(this.goodsInfo);
+						}
+						this.setGoodsList(goodsList);
+					},
+					fail: (err) => {
+						let goodsList = [];
+						console.log(typeof(this.goodsInfo.number));
+						goodsList.push(this.goodsInfo);
+						this.setGoodsList(goodsList);
+					}
+				})
+			},
+			setGoodsList(goodsList) {
+				uni.setStorage({
+					key: "goodsList",
+					data: goodsList,
+					success() {
+						uni.showToast({
+							icon: "success",
+							title: "添加购物车成功"
+						})
+					}
+				})
 			}
 		}
 	}
@@ -244,6 +328,7 @@
 					color: #999999;
 					border-radius: 5upx;
 					background-color: #f6f6f6;
+
 					&:not(:last-child) {
 						margin-right: 10upx;
 					}
@@ -264,21 +349,23 @@
 			}
 		}
 	}
+
 	.comment {
 		width: 92%;
 		margin-bottom: 20upx;
 		padding: 20upx 4%;
+
 		.row {
 			display: flex;
 			align-items: center;
 			justify-content: space-between;
 			margin-bottom: 30upx;
-			
+
 			.text {
 				font-size: 30upx;
 				color: #a2a2a2;
 			}
-			
+
 			.show {
 				font-size: 28upx;
 				display: flex;
@@ -286,29 +373,32 @@
 				color: #17e6a1;
 			}
 		}
-	
+
 		.comment__info {
 			.user__info {
 				display: flex;
 				align-items: center;
+
 				.user__profile {
 					margin-right: 8upx;
 					width: 40upx;
 					height: 40upx;
 					border-radius: 50%;
 				}
+
 				.user__name {
 					color: #999999;
 					font-size: 24upx;
 				}
 			}
+
 			.comment__content {
 				margin-top: 10upx;
 				font-size: 26upx;
 			}
 		}
 	}
-	
+
 	.goods-detail {
 		.title {
 			height: 80upx;
@@ -318,6 +408,73 @@
 			align-items: center;
 			font-size: 26upx;
 			color: #999999;
+		}
+	}
+
+	.footer {
+		position: fixed;
+		bottom: 0upx;
+		width: 92%;
+		padding: 0 4%;
+		height: 99upx;
+		border-top: solid 1upx #eee;
+		background-color: #fff;
+		z-index: 2;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		.icons {
+			display: flex;
+			height: 80upx;
+			margin-left: -4%;
+
+			.box {
+				width: 80upx;
+				height: 80upx;
+				display: flex;
+				justify-content: center;
+				flex-wrap: wrap;
+
+				.icon {
+					font-size: 40upx;
+					color: #828282;
+				}
+
+				.text {
+					display: flex;
+					justify-content: center;
+					width: 100%;
+					font-size: 22upx;
+					color: #666;
+				}
+			}
+		}
+
+		.btns {
+			height: 80upx;
+			border-radius: 40upx;
+			overflow: hidden;
+			display: flex;
+			margin-right: -2%;
+
+			.joinCart,
+			.buy {
+				height: 80upx;
+				padding: 0 40upx;
+				color: #fff;
+				display: flex;
+				align-items: center;
+				font-size: 28upx;
+			}
+
+			.joinCart {
+				background-color: #f0b46c;
+			}
+
+			.buy {
+				background-color: #f06c7a;
+			}
 		}
 	}
 </style>

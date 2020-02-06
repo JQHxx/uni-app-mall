@@ -6,7 +6,7 @@
 					&#xe679;
 				</view>
 			</view>
-			<view class="shop-cart">
+			<view class="shop-cart" @tap="showCart">
 				<view class="icon iconfont">
 					&#xe6af;
 				</view>
@@ -27,6 +27,11 @@
 		methods: {
 			back() {
 				uni.navigateBack()
+			},
+			showCart() {
+				uni.switchTab({
+					url: "../tabBar/cart/cart"
+				})
 			}
 		},
 		onLoad() {
