@@ -1,9 +1,0 @@
-{
-  "navigationBarTitleText": "分类",
-  "titleNView": false,
-  "bounce": "none",
-  "usingComponents": {
-    "page-status": "/components/status",
-    "page-header": "/pages/tabBar/home/pageHeader"
-  }
-}

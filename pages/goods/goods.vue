@@ -138,7 +138,7 @@
 		},
 		onLoad(option) {
 			this.goodsInfo = JSON.parse(option.goodsInfo)
-			console.log(this.goodsInfo);
+			// console.log(this.goodsInfo);
 			this.initData()
 		},
 		methods: {
@@ -146,7 +146,7 @@
 				this.request({
 					url: interfaces.getGoods,
 					success: res => {
-						console.log(res.data, 'data');
+						// console.log(res.data, 'data');
 						this.goodsData = res.data
 					}
 				})
@@ -184,7 +184,6 @@
 			},
 			add() {
 				this.goodsInfo.number++;
-				console.log(typeof(this.goodsInfo.number));
 			},
 			showAllComment() {
 				try {
@@ -207,7 +206,7 @@
 					key: "goodsList",
 					success: res => {
 						let goodsList = res.data;
-						console.log(goodsList);
+						// console.log(goodsList);
 						let isExist = false;
 
 						goodsList.forEach(goods => {
@@ -224,7 +223,6 @@
 					},
 					fail: (err) => {
 						let goodsList = [];
-						console.log(typeof(this.goodsInfo.number));
 						goodsList.push(this.goodsInfo);
 						this.setGoodsList(goodsList);
 					}

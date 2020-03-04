@@ -75,6 +75,10 @@
 				"navigationBarTitleText": "我的二维码"
 			}
 		}
+        ,{
+            "path" : "111/111/111",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

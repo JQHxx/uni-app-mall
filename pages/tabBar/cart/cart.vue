@@ -35,7 +35,7 @@
 								<view class="price">
 									￥{{goods.price}}
 								</view>
-								<Counter :goodsInfo="goods" @add="add(goods)" @sub="sub(goods)"></Counter>
+								<Counter @change="change(goods)" :goodsInfo="goods" @add="add(goods)" @sub="sub(goods)"></Counter>
 							</view>
 						</view>
 					</view>
@@ -82,6 +82,11 @@
 				isSelectedAll: false,
 				selectedList: [],
 				sumPrice: '0.00'
+			}
+		},
+		watch: {
+			"$route": function() {
+				console.log("change");
 			}
 		},
 		methods: {
@@ -134,6 +139,13 @@
 				this.changeStorage(goods);
 				this.sum();
 			},
+			change(goods) {
+				this.$once('change', (val) => {
+					goods.number = val
+					this.changeStorage(goods);
+					this.sum();
+				})
+			},
 			handleCheckbox(goods) {
 				goods.selected = !goods.selected;
 
@@ -184,6 +196,9 @@
 					key: "goodsList",
 					data: this.goodsList
 				})
+				
+				this.oldIndex = null;
+				this.theIndex = null;
 			},
 			handleCheck() {
 				if (this.selectedList.length < 1) {

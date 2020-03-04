@@ -36,7 +36,7 @@
 									<view class="icon iconfont">&#xe7e9;</view>
 								</view>
 							</view>
-							<view @tap="showBigImg(image,rating.img)" class="box" v-for="(image,index) in rating.img" :key="index">
+							<view @tap="showBigImg(image,rating.img)" class="box" v-for="(image,i) in rating.img" :key="i">
 								<image mode="aspectFill" :src="image"></image>
 							</view>
 						</view>
@@ -96,13 +96,13 @@
 		},
 		onLoad() {
 			// #ifdef MP
-				this.showVideo = false;
+			this.showVideo = false;
 			// #endif
 			try {
 				const comments = uni.getStorageSync('comments');
 				if (comments) {
 					this.ratingsList = comments
-					console.log(this.ratingsList);
+					// console.log(this.ratingsList);
 				}
 			} catch (e) {
 				//TODO handle the exception
@@ -128,19 +128,21 @@
 				})
 			},
 			videoControl(e) {
-				if(e.detail.fullScreen) {
+				if (e.detail.fullScreen) {
 					this.videoContext.play()
 				} else {
 					// 停止播放
-					// this.videoContext.stop()
+					// #ifdef APP-PLUS
+					this.videoContext.stop()
+					// #endif
 					this.videoPause()
 				}
 			},
 			videoPause() {
 				this.videoSrc = "";
-				
+
 				// #ifdef MP
-					this.showVideo = false;
+				this.showVideo = false;
 				// #endif
 			}
 		},
@@ -180,97 +182,104 @@
 				}
 			}
 		}
-	
+
 		.comment-list {
 			width: 100%;
 			flex-wrap: wrap;
 			padding: 20upx 0;
-			
+
 			.comment__content {
 				width: 100%;
 				margin-top: 30upx;
-				
+
 				.comment__left {
 					width: 10vw;
 					flex-shrink: 0;
 					margin-right: 10upx;
-				
+
 					.comment__figure {
 						width: 100%;
-				
+
 						image {
 							width: 10vw;
 							height: 10vw;
 							border-radius: 100%;
 						}
-				
+
 					}
 				}
+
 				.comment__right {
+					width: 100%;
+					flex-wrap: wrap;
+
+					.name-date {
+						width: 100%;
+						justify-content: space-between;
+						align-items: baseline;
+
+						.username {
+							font-size: 32upx;
+							color: #555;
+						}
+
+						.date {
+							font-size: 28upx;
+							color: #aaa;
+						}
+					}
+
+					.spec {
+						width: 100%;
+						color: #aaa;
+						font-size: 26upx;
+					}
+
+					.medias {
 						width: 100%;
 						flex-wrap: wrap;
-						.name-date {
-							width: 100%;
-							justify-content: space-between;
-							align-items: baseline;
-						
-							.username {
-								font-size: 32upx;
-								color: #555;
-							}
-						
-							.date {
-								font-size: 28upx;
-								color: #aaa;
-							}
+
+						.medias__content {
+							width: 94%;
+							padding: 0 3%;
+							font-size: 30upx;
 						}
-						.spec {
-							width: 100%;
-							color: #aaa;
-							font-size: 26upx;
-						}
-						.medias {
+
+						.img-video {
 							width: 100%;
 							flex-wrap: wrap;
-							.medias__content {
-								width: 94%;
-								padding: 0 3%;
-								font-size: 30upx;
-							}
-							.img-video {
-								width: 100%;
-								flex-wrap: wrap;
-							
-								.box {
-									width: calc((84.6vw - 50upx)/4);
-									height: calc((84.6vw - 50upx)/4);
-									margin: 5upx 5upx;
-									position: relative;
-									justify-content: center;
-									align-items: center;
-							
-									image {
-										position: absolute;
-										width: 100%;
-										height: 100%;
-										border-radius: 10upx;
-									}
-							
-									.playbtn {
-										position: absolute;
-							
-										.icon {
-											font-size: 80upx;
-											color: rgba(255, 255, 255, .9)
-										}
+
+							.box {
+								width: calc((84.6vw - 50upx)/4);
+								height: calc((84.6vw - 50upx)/4);
+								margin: 5upx 5upx;
+								position: relative;
+								justify-content: center;
+								align-items: center;
+
+								image {
+									position: absolute;
+									width: 100%;
+									height: 100%;
+									border-radius: 10upx;
+								}
+
+								.playbtn {
+									position: absolute;
+
+									.icon {
+										font-size: 80upx;
+										color: rgba(255, 255, 255, .9)
 									}
 								}
 							}
 						}
+					}
 				}
 			}
 		}
-		.myVideo{
+
+		.myVideo {
 			position: fixed;
 			top: 50%;
 			right: 100%;

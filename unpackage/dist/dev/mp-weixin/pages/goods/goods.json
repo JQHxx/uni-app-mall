@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "商品",
-  "usingComponents": {
-    "goods-header": "/pages/goods/goodHeader",
-    "pop-spec": "/components/popSpec"
-  }
-}

@@ -1,6 +1,6 @@
 <template>
-	<view class="popup" @tap.self="hide" v-show="spaceInfo.showSpace">
-		<view class="layer">
+	<view class="popup" @tap="hide" v-show="spaceInfo.showSpace">
+		<view class="layer" @tap.stop>
 			<view class="layer__content">
 
 

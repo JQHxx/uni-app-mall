@@ -4,7 +4,7 @@
 			<view class="icon iconfont">&#xe768;</view>
 		</view>
 		<view class="input">
-			<input type="text" v-model="goodsInfo.number" />
+			<input type="text" @tap.stop @change="change" v-model="goodsInfo.number" />
 		</view>
 		<view class="add" @tap.stop="add">
 			<view class="icon iconfont">&#xe767;</view>
@@ -23,6 +23,10 @@
 			},
 			add() {
 				this.$emit('add')
+			},
+			change(e) {
+				this.$emit('change')
+				this.$parent.$emit('change', e.target.value)
 			}
 		}
 	}
